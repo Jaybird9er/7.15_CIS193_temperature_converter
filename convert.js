@@ -4,6 +4,15 @@ function domLoaded() {
    var cVal = document.getElementById("cInput");
    var fVal = document.getElementById("fInput");
 
+   cVal.addEventListener("input", function() {
+      // if (fVal.value !== "")
+         fVal.value = "";
+   });
+   fVal.addEventListener("input", function() {
+      // if (cVal.value !== "")
+         cVal.value = "";
+   });
+
    document.getElementById("convertButton").addEventListener("click", function () {
       if (cVal.value === "") { // farenheit to celsius
          var fNum = parseFloat(fVal.value);
