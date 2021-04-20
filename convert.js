@@ -8,20 +8,30 @@ function domLoaded() {
 
    // checks if the other field is blank first
    cVal.addEventListener("input", function() {
-         fVal.value = "";
+      fVal.value = "";
+      // validate that field input is a number
+      if (isNaN(cVal.value))
+         document.getElementById("errorMessage").innerHTML = cVal.value + " is not a number";
+      else
+         document.getElementById("errorMessage").innerHTML = "";
    });
    fVal.addEventListener("input", function() {
-         cVal.value = "";
+      cVal.value = "";
+      // validate that field input is a number
+      if (isNaN(fVal.value))
+         document.getElementById("errorMessage").innerHTML = "<p>" + fVal.value + " is not a number</p>";
+      else
+         document.getElementById("errorMessage").innerHTML = "";
    });
-
+   
    // after only one field is in use, the button click can run
    document.getElementById("convertButton").addEventListener("click", function () {
-      cNum = parseFloat(cVal.value);
-      fNum = parseFloat(fVal.value);
       if (cVal.value === "") { // farenheit to celsius
+         fNum = parseFloat(fVal.value);
          cVal.value = convertFtoC(fNum);
       }
       else if (fVal.value === "") { // celsius to farenheit
+         cNum = parseFloat(cVal.value);
          fVal.value = convertCtoF(cNum);
       }
 
