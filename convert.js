@@ -3,25 +3,36 @@ window.addEventListener("DOMContentLoaded", domLoaded);
 function domLoaded() {
    var cVal = document.getElementById("cInput");
    var fVal = document.getElementById("fInput");
+   var cNum;
+   var fNum;
 
+   // checks if the other field is blank first
    cVal.addEventListener("input", function() {
-      // if (fVal.value !== "")
          fVal.value = "";
    });
    fVal.addEventListener("input", function() {
-      // if (cVal.value !== "")
          cVal.value = "";
    });
 
+   // after only one field is in use, the button click can run
    document.getElementById("convertButton").addEventListener("click", function () {
+      cNum = parseFloat(cVal.value);
+      fNum = parseFloat(fVal.value);
       if (cVal.value === "") { // farenheit to celsius
-         var fNum = parseFloat(fVal.value);
          cVal.value = convertFtoC(fNum);
       }
       else if (fVal.value === "") { // celsius to farenheit
-         var cNum = parseFloat(cVal.value);
          fVal.value = convertCtoF(cNum);
       }
+
+      // change the weather image
+      fNum = parseFloat(fVal.value);
+      if (fNum < 32)
+         document.getElementById("weatherImage").src = "cold.png";
+      else if (fNum >= 32 && fNum <= 50)
+         document.getElementById("weatherImage").src = "cool.png";
+      else
+         document.getElementById("weatherImage").src = "warm.png";
    });
 }
 
